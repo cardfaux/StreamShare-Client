@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchStreams } from '../../actions/index';
+import { Link } from 'react-router-dom';
+import { fetchStreams } from '../../actions';
 
 class StreamList extends React.Component {
 	componentDidMount() {
@@ -16,7 +16,7 @@ class StreamList extends React.Component {
 						Edit
 					</Link>
 					<Link
-						to={`/stream/delete/${stream.id}`}
+						to={`/streams/delete/${stream.id}`}
 						className='ui button negative'
 					>
 						Delete
@@ -33,7 +33,9 @@ class StreamList extends React.Component {
 					{this.renderAdmin(stream)}
 					<i className='large middle aligned icon camera' />
 					<div className='content'>
-						{stream.title}
+						<Link to={`/streams/${stream.id}`} className='header'>
+							{stream.title}
+						</Link>
 						<div className='description'>{stream.description}</div>
 					</div>
 				</div>
@@ -56,7 +58,7 @@ class StreamList extends React.Component {
 	render() {
 		return (
 			<div>
-				<h2>streams</h2>
+				<h2>Streams</h2>
 				<div className='ui celled list'>{this.renderList()}</div>
 				{this.renderCreate()}
 			</div>
